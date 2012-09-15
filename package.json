@@ -1,0 +1,13 @@
+{
+  "name": "rewriter",
+  "version": "1.0.0",
+  "description": "Url rewriter",
+  "main": "pxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "repository": "",
+  "author": "Unclephil",
+  "license": "BSD"
+}
