@@ -2,10 +2,13 @@
 // Unclephil 2011  tc.unclephil.net
 // ================================
 // Derived from well knowed http-proxy.js
-// ========================================
+// Is able to manage international domain name
+// In this case the configuration must be in idn fom, NOT ASCII   
+// ============================================================
 var http = require('http');
 var sys  = require('sys');
 var fs   = require('fs');
+var idn  = require('punycode');
 
 // CONFIGURATION
 // this section contains message
@@ -82,6 +85,7 @@ http.createServer(function(request, response) {
     return;
   }
   sys.log(url);
+  // reply to config url
   if (url == cfgresturl){
     fs.readFile('./configlist', function(error, content) {
         if (error) {
@@ -97,7 +101,8 @@ http.createServer(function(request, response) {
      });
   }
   else {
-    oldloc = request.headers['host']
+    oldhost = request.headers['host'];
+    oldloc = idn.toUnicode(oldhost);
     newloc = rewrite_host(oldloc);
     if (newloc=="") {
       msg = oldloc + " "+msgErrorHostNotDefined;
@@ -107,7 +112,7 @@ http.createServer(function(request, response) {
     }
     else {
       sys.log(ip + ": " + request.method + " " + oldloc +" to "+newloc);
-      response.writeHead(301,{'Location':newloc, 'Expires': (new Date).toGMTString()});
+      response.writeHead(301,{'Location':idn.toASCII(newloc), 'Expires': (new Date).toGMTString()});
       response.end();
     }
   }
