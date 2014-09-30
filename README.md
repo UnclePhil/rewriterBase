@@ -11,6 +11,13 @@ If not, the server is crashing
 
 Requirements
 * Node js > 0.4.x
+* https://github.com/bestiejs/punycode.js   for idn purpose
+
+Installation 
+* Git clone ....
+* cd  inthedirectory
+* npm install . ( to install dependencies)
+
 
 Running (linux preferred)
 	nohup node pxy.js >/var/log/pxy.log &
@@ -21,6 +28,8 @@ Features:
 * You can change the listening port (8080)
 * You can change all messages
 * You can change the (basic) rest Url who's giving the list of rewriting rules
+* IDN name are accepted: have a look in the sample config file
+
 
 Not in:
 * Statistics
